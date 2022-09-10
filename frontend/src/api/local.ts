@@ -1,6 +1,7 @@
 export enum LocalData {
   ACCESS_TOKEN = "access_token",
   REFRESH_TOKEN = "refresh_token",
+  USER = "user",
 }
 
 export function setLocalData(
@@ -21,4 +22,5 @@ export function getLocalData(key: LocalData): string | null {
 export function clearLocalData(): void {
   localStorage.removeItem(LocalData.ACCESS_TOKEN);
   localStorage.removeItem(LocalData.REFRESH_TOKEN);
+  localStorage.removeItem(LocalData.USER);
 }

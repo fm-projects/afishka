@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import Home from "../components/homepage/Home.vue";
+import Home from "../components/Homepage.vue";
 import { handleMetaViews } from "./utils";
 import { store } from "@/store";
 import { ViewPermissions } from "./permissions";
@@ -18,7 +18,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/denied",
     name: "denied",
-    component: () => import("../components/PermissionMissing.vue"),
+    component: () => import("../components/PermissionDenied.vue"),
   },
 ];
 

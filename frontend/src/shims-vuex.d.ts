@@ -14,6 +14,7 @@ declare module "vuex" {
 
 declare module "vue-router" {
   interface RouteMeta {
+    permissions?: number;
     requiresAuth?: boolean;
     navbar?: {
       transparent?: boolean;

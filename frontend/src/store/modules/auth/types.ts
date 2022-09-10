@@ -1,7 +1,11 @@
 import { APIUser } from "@/api/services/auth";
-import { ActionContext, CommitOptions, Store as VuexStore, DispatchOptions } from "vuex";
+import {
+  ActionContext,
+  CommitOptions,
+  Store as VuexStore,
+  DispatchOptions,
+} from "vuex";
 import { RootState } from "@/store";
-import { APIKlassCompact } from "@/api/services/klasses";
 
 export interface AuthState {
   accessToken: string | null;
@@ -10,7 +14,7 @@ export interface AuthState {
 }
 
 export interface UserCredentials {
-  email: string;
+  username: string;
   password: string;
 }
 
@@ -52,19 +56,19 @@ export interface Actions {
 
   [AuthActionTypes.LOGOUT]({ commit }: AugmentedActionContext): Promise<void>;
 
-  [AuthActionTypes.FETCH_CURRENT_USER]({ commit }: AugmentedActionContext): Promise<void>;
+  [AuthActionTypes.FETCH_CURRENT_USER]({
+    commit,
+  }: AugmentedActionContext): Promise<void>;
 }
 
 export type Getters = {
-  isAdmin: (state: AuthState) => boolean;
   isAuthenticated: (state: AuthState) => boolean;
-  isStudent: (state: AuthState) => boolean;
-  inKlass: (state: AuthState) => boolean;
-  isMonitor: (state: AuthState) => boolean;
-  klass: (state: AuthState) => APIKlassCompact | null;
 };
 
-export type AuthStore<S = AuthState> = Omit<VuexStore<S>, "getters" | "commit" | "dispatch"> & {
+export type AuthStore<S = AuthState> = Omit<
+  VuexStore<S>,
+  "getters" | "commit" | "dispatch"
+> & {
   commit<K extends keyof Mutations, P extends Parameters<Mutations[K]>[1]>(
     key: K,
     payload: P,

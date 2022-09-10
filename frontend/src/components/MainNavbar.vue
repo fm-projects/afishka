@@ -1,19 +1,15 @@
 <template>
   <nav
-    class="navbar navbar-light w-100 fixed-top"
+    class="navbar navbar-light w-100 fixed-top navbar-expand-sm"
     id="main-navbar"
     :class="{
       scrolled: isScrolled,
-      'navbar-expand':
-        route.meta.navbar?.expand ||
-        (route.name === 'home' && store.getters.isStudent),
-      'navbar-expand-sm': !route.meta.navbar?.expand,
     }"
   >
     <div class="container">
       <router-link to="/" class="navbar-brand d-block">
         <img
-          src="@/assets/icons/logo.svg"
+          :src="logo"
           id="logo"
           class="d-inline-block align-center me-2"
           alt=""
@@ -42,23 +38,7 @@
           v-if="!user && !(route.name === 'login' || route.name === 'register')"
         >
           <li class="d-flex">
-            <ul class="navbar-nav">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <router-link to="/login" class="me-2 nav-link"
-                    >Войти</router-link
-                  >
-                </li>
-              </ul>
-              <li class="nav-item">
-                <router-link
-                  to="/register"
-                  class="me-2 btn btn-outline-primary"
-                >
-                  Создать аккаунт</router-link
-                >
-              </li>
-            </ul>
+            <telegram-login telegramLogin="AlmetEventBot" mode="redirect" redirect-url="/"/>
           </li>
         </div>
 
@@ -69,16 +49,8 @@
             id="mainNavbarDropdown"
           >
             <div class="navbar-text me-3 fw-bold">
-              {{ user.surname }} {{ user.first_name }}
+              {{ user }}
             </div>
-
-            <svg v-html="jdenticon" id="avatar"></svg>
-            <span
-              v-if="unreadNotificationsCount"
-              id="notification-count-badge"
-              class="position-absolute bg-danger border border-light rounded-circle"
-            >
-            </span>
           </div>
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
@@ -109,6 +81,8 @@ import { computed, onMounted, onUnmounted, ref } from "vue";
 import { useStore } from "@/store";
 import router from "@/router";
 import { useRoute } from "vue-router";
+import logo from "@/assets/icons/icon.svg";
+import TelegramLogin from "./TelegramLogin.vue";
 
 const store = useStore();
 const route = useRoute();
@@ -118,7 +92,7 @@ const user = computed(() => store.state.auth.user);
 const isScrolled = ref(false);
 
 const logout = () => {
-//   store.dispatch(AuthActionTypes.LOGOUT);
+  //   store.dispatch(AuthActionTypes.LOGOUT);
   router.push("/");
 };
 
@@ -142,8 +116,7 @@ onUnmounted(() => {
 }
 
 #logo {
-  width: 35px;
-  height: 35px;
+  height: 30px;
 }
 
 #brand-name {

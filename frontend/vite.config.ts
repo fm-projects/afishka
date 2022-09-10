@@ -1,7 +1,6 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-
-const path = require("path");
+import path from "path";
 
 process.env.APP_VERSION = require("./package.json").version;
 
@@ -14,7 +13,7 @@ export default defineConfig({
   },
   server: {
     host: true,
-    port: 8080,
+    port: 80,
     proxy: {
       "/api": {
         target: "http://localhost:8000",

@@ -13,6 +13,11 @@ export enum AuthAPIURLS {
   REFRESH_TOKEN = "auth/jwt/refresh/",
 }
 
+interface UserCredentials {
+  username: string;
+  password: string;
+}
+
 export interface APIUser {}
 
 export const getCurrentUser = (): Promise<AxiosResponse<APIUser>> => {
@@ -23,7 +28,7 @@ export const login = (
   credentials: UserCredentials
 ): Promise<AxiosResponse<APITokens>> => {
   return API.noAuthAxios.post(AuthAPIURLS.GET_TOKEN, {
-    email: credentials.email,
+    username: credentials.username,
     password: credentials.password,
   });
 };
