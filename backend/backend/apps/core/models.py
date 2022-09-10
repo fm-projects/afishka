@@ -8,11 +8,11 @@ class User(AbstractUser):
 
 class TelegramUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="tg_user")
-    telegram_id = models.IntegerField(null=False, unique=True)
+    tg_id = models.IntegerField(null=False, unique=True)
     data = models.JSONField(null=True)
 
     def __str__(self):
-        return self.telegram_username
+        return self.tg_id
 
 
 class Event(models.Model):
@@ -30,3 +30,6 @@ class Event(models.Model):
     class Meta:
         verbose_name = "Мероприятие"
         verbose_name_plural = "Мероприятия"
+
+    def __str__(self):
+        return self.name
