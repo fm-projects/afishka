@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "backend.apps.core",
     "corsheaders",
     "rest_framework",
     "django_filters",
@@ -87,6 +88,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "core.User"
 
 LANGUAGE_CODE = "ru"
 
@@ -107,7 +109,6 @@ STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "dist" / "static"
 STATICFILES_DIRS = []
 
-
 REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": [
         "django_filters.rest_framework.DjangoFilterBackend",
@@ -120,7 +121,6 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10,
 }
 
-
 JWT_AUTH = {
     "TOKEN_TYPE_CLAIM": "rest_framework_simplejwt.tokens.AccessToken",
     "ACCESS_TOKEN_LIFETIME": datetime.timedelta(minutes=5),
@@ -129,7 +129,6 @@ JWT_AUTH = {
     "BLACKLIST_AFTER_ROTATION": False,
     "UPDATE_LAST_LOGIN": True,
 }
-
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
