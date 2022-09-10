@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="drawing (copy).svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.2904176"
+     inkscape:cx="407.61999"
+     inkscape:cy="532.38581"
+     inkscape:window-width="1854"
+     inkscape:window-height="1016"
+     inkscape:window-x="66"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g2558" />
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient2572">
+      <stop
+         style="stop-color:#4776e6;stop-opacity:1;"
+         offset="0"
+         id="stop2568" />
+      <stop
+         style="stop-color:#8e54e9;stop-opacity:1;"
+         offset="1"
+         id="stop2570" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2572"
+       id="linearGradient2574"
+       x1="9.3430376"
+       y1="107.55177"
+       x2="199.0387"
+       y2="173.24294"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g2558"
+       transform="translate(0.1588478)"
+       style="fill-opacity:1;fill:url(#linearGradient2574)">
+      <text
+         xml:space="preserve"
+         style="font-size:30.5797px;font-family:'JetBrains Mono';-inkscape-font-specification:'JetBrains Mono';fill:url(#linearGradient2574);fill-opacity:1;stroke-width:0.159269"
+         x="50.461586"
+         y="151.20512"
+         id="text236"><tspan
+           sodipodi:role="line"
+           id="tspan234"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'VK Sans Display';-inkscape-font-specification:'VK Sans Display Bold';fill:url(#linearGradient2574);fill-opacity:1;stroke-width:0.159269"
+           x="50.461586"
+           y="151.20512">a//фишка</tspan></text>
+      <path
+         d="m 28.917,128.32297 c -6.185831,0 -11.218945,5.03312 -11.218945,11.21957 0,1.61367 0.330275,3.15436 0.981175,4.57966 2.805047,6.1381 8.183102,12.61867 9.764958,14.45845 a 0.62469594,0.62469594 0 0 0 0.946253,0 c 1.581221,-1.83948 6.959286,-8.31973 9.765276,-14.45845 0.651205,-1.4253 0.981168,-2.96599 0.981168,-4.57966 -5.29e-4,-6.18645 -5.033746,-11.21957 -11.219885,-11.21957 z m 0,17.04705 c -3.213299,0 -5.827795,-2.61449 -5.827795,-5.82779 0,-3.21362 2.614496,-5.8281 5.827795,-5.8281 3.213299,0 5.827788,2.61448 5.827788,5.8281 3.21e-4,3.2133 -2.614169,5.82779 -5.827788,5.82779 z"
+         data-original="#000000"
+         id="path396"
+         style="fill:url(#linearGradient2574);stroke-width:0.31188;fill-opacity:1" />
+    </g>
+  </g>
+</svg>
