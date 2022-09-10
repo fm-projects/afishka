@@ -24,7 +24,7 @@ yarn-error.log*
 pnpm-debug.log*
 
 # Python cache
-__pycache__/
+__pycache__
 
 # VueJS dist
 dist
