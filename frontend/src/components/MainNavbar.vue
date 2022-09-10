@@ -38,7 +38,23 @@
           v-if="!user && !(route.name === 'login' || route.name === 'register')"
         >
           <li class="d-flex">
-            <telegram-login telegramLogin="AlmetEventBot" mode="redirect" redirect-url="/"/>
+            <ul class="navbar-nav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <router-link to="/login" class="me-2 nav-link"
+                    >Войти</router-link
+                  >
+                </li>
+              </ul>
+              <li class="nav-item">
+                <router-link
+                  to="/register"
+                  class="me-2 btn btn-outline-primary"
+                >
+                  Создать аккаунт</router-link
+                >
+              </li>
+            </ul>
           </li>
         </div>
 
@@ -49,20 +65,21 @@
             id="mainNavbarDropdown"
           >
             <div class="navbar-text me-3 fw-bold">
-              {{ user }}
+              {{ user.username }}
             </div>
+            <svg v-html="jdenticon" id="avatar"></svg>
           </div>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li>
+            <!-- <li>
               <router-link class="dropdown-item" to="/account">
                 <i class="bi bi-person me-2"></i><span>Аккаунт</span>
               </router-link>
-            </li>
-            <li>
+            </li> -->
+            <!-- <li>
               <router-link class="dropdown-item" to="/settings">
                 <i class="bi bi-gear me-2"></i><span>Настройки</span>
               </router-link>
-            </li>
+            </li> -->
             <li>
               <a class="dropdown-item" href="#" @click.prevent="logout">
                 <i class="bi bi-box-arrow-right me-2"></i>
@@ -82,17 +99,19 @@ import { useStore } from "@/store";
 import router from "@/router";
 import { useRoute } from "vue-router";
 import logo from "@/assets/icons/icon.svg";
-import TelegramLogin from "./TelegramLogin.vue";
+import { toSvg } from "jdenticon";
+import { AuthActionTypes } from "@/store/modules/auth/types";
 
 const store = useStore();
 const route = useRoute();
 
 const user = computed(() => store.state.auth.user);
+const jdenticon = computed(() => toSvg(user.value?.id, 45));
 
 const isScrolled = ref(false);
 
 const logout = () => {
-  //   store.dispatch(AuthActionTypes.LOGOUT);
+  store.dispatch(AuthActionTypes.LOGOUT);
   router.push("/");
 };
 

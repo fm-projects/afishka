@@ -16,6 +16,16 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: "/login",
+    name: "login",
+    component: () => import("../components/Login.vue"),
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: () => import("../components/Register.vue"),
+  },
+  {
     path: "/denied",
     name: "denied",
     component: () => import("../components/PermissionDenied.vue"),

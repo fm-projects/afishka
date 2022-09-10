@@ -7,7 +7,6 @@ export interface APITokens {
 }
 
 export enum AuthAPIURLS {
-  CURRENT_USER = "auth/users/me",
   GET_TOKEN = "auth/jwt/create/",
   REMOVE_TOKEN = "auth/jwt/blacklist/",
   REFRESH_TOKEN = "auth/jwt/refresh/",
@@ -18,10 +17,22 @@ interface UserCredentials {
   password: string;
 }
 
-export interface APIUser {}
+interface CreateUserData {
+  username: string;
+  password: string;
+}
+
+export interface APIUser {
+  username: string;
+  id: number;
+}
 
 export const getCurrentUser = (): Promise<AxiosResponse<APIUser>> => {
-  return API.axios.get<APIUser>(AuthAPIURLS.CURRENT_USER);
+  return API.axios.get<APIUser>("auth/users/me");
+};
+
+export const createUserData = (): Promise<AxiosResponse<APIUser>> => {
+  return API.noAuthAxios.post("auth/users/");
 };
 
 export const login = (

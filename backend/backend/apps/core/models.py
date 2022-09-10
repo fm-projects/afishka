@@ -6,15 +6,6 @@ class User(AbstractUser):
     pass
 
 
-class TelegramUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="tg_user")
-    tg_id = models.IntegerField(null=False, unique=True)
-    data = models.JSONField(null=True)
-
-    def __str__(self):
-        return self.tg_id
-
-
 class Event(models.Model):
     EVENT_TYPES = (
         (0, "Ограниченная группа"),
