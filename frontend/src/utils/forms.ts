@@ -171,7 +171,7 @@ export const handleBackendError = (error: AxiosError, rules: BackendErrorRules):
 
         // Field matches a field in the error
         if (Object.prototype.hasOwnProperty.call(error.response.data, field)) {
-          rules[rule][field](error.response.data[field]);
+          rules[rule][field]((error.response.data[field]));
         }
       }
     }

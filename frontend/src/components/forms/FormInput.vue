@@ -16,7 +16,7 @@
         'is-valid': isBound && !error.length,
       }"
       :maxlength="maxlength"
-      @input="$emit('update:modelValue', $event.target.value)"
+      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
       @change="$emit('change', $event)"
       @keyup="$emit('keyup', $event)"
       ref="inputRef"

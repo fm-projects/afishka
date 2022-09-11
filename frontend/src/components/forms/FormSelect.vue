@@ -1,6 +1,8 @@
 <template>
   <div class="form-input-wrapper">
-    <label :for="prefix + '_' + name" v-if="label" class="form-label">{{ label }}</label>
+    <label :for="prefix + '_' + name" v-if="label" class="form-label">{{
+      label
+    }}</label>
     <select
       :name="name"
       :id="prefix + '_' + name"
@@ -13,8 +15,8 @@
         'is-valid': isBound && !error.length,
       }"
       @change="
-        $emit('update:modelValue', $event.target.value);
-        $emit('change', $event.target.value);
+        $emit('update:modelValue', ($event.target as HTMLInputElement).value);
+        $emit('change', ($event.target as HTMLInputElement).value);
       "
     >
       <option v-if="placeholder" hidden disabled selected value="">
