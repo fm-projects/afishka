@@ -107,6 +107,17 @@
         </label>
       </div>
     </div>
+    <!-- 
+    <div class="mb-3">
+      <FormInput
+        label="Обложка"
+        v-model="data.thumbnail.value"
+        :error="data.thumbnail.errorMessage"
+        :isBound="isBound"
+        name="thumbnail"
+        type="file"
+      ></FormInput>
+    </div> -->
 
     <button class="btn btn-outline-dark" @click="submit">Добавить</button>
   </div>
@@ -146,7 +157,7 @@ const data = reactive<FormBuilder>({
   },
   max_price: {
     validators: [],
-    value: "",
+    value: "0",
   },
   participants: {
     validators: ["required"],
@@ -156,6 +167,10 @@ const data = reactive<FormBuilder>({
     validators: [],
     value: "",
   },
+  // thumbnail: {
+  //   validators: [],
+  //   value: "",
+  // },
 });
 
 const submit = () => {
@@ -175,6 +190,10 @@ const submit = () => {
     description: data.description.value,
     name: data.name.value,
   };
+
+  // if (data.thumbnail.value) {
+  //   newEvent.thumbnail = data.thumbnail.value;
+  // }
 
   createEvent(newEvent).then(() => {
     router.push("/");

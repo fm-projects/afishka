@@ -2,7 +2,7 @@
   <div class="container rt-wp mt-4">
     <h1 class="fs-2 fw-bold mb-4">Афиша мероприятий в Альметьевске</h1>
 
-    <div class="row">
+    <div class="row mb-5">
       <div class="col-12 col-lg-4 order-0 order-lg-1 mb-3 mb-lg-0">
         <div class="d-flex flex-wrap">
           <router-link class="btn btn-outline-dark mb-2 me-2" to="/create">

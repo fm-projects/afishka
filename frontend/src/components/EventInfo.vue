@@ -5,12 +5,26 @@
         <i class="bi-exclamation-circle me-2"></i>Данное событие ожидает
         подтверждения модератора
       </div>
-      <div class="card" :style="gradients[obj.id % gradients.length][0]">
+      <div
+        class="card"
+        :style="
+          obj.thumbnail
+            ? `background-image: url(${obj.thumbnail}); background-size: cover; background-repeat: no-repeat; background-position: center center;`
+            : gradients[obj.id % gradients.length][0]
+        "
+      >
         <div
           class="card-body position-relative d-flex align-items-center justify-content-center"
-          :class="[gradients[obj.id % gradients.length][1]]"
+          :class="
+            obj.thumbnail
+              ? ['text-light']
+              : [gradients[obj.id % gradients.length][1]]
+          "
         >
-          <h1 class="card-name fw-bold fs-2">
+          <h1
+            class="card-name fw-bold fs-2"
+            :class="obj.thumbnail ? ['badge bg-white text-dark'] : []"
+          >
             {{ obj.name }}
           </h1>
 
@@ -63,20 +77,20 @@
       </div>
 
       <div class="row mt-3">
-        <div class="col order-1 order-md-0">
+        <div class="col order-1 order-md-0 fs-5">
           <div class="">
             <div class="mb-3" v-if="obj.description">
               {{ obj.description }}
             </div>
             <div class="mb-1">
-              <i class="bi-clock me-2"></i>
+              <i class="bi bi-clock me-2"></i>
               {{ toShortDateTime(new Date(obj.start)) }}
             </div>
             <div v-if="obj.address" class="mb-1">
               <i class="bi-geo-alt me-2"></i>{{ obj.address }}
             </div>
             <div class="mb-1">
-              <i class="bi-calendar-check me-2"></i
+              <i class="bi bi-check me-2"></i
               >{{
                 obj.reg_needed
                   ? "Требуется регистрация"
@@ -86,6 +100,16 @@
             <div v-if="obj.organizer" class="mb-1">
               <i class="bi-person me-2"></i>
               {{ obj.organizer }}
+            </div>
+            <div v-if="obj.organizer" class="mb-1">
+              <i class="bi-people me-2"></i>
+              {{
+                plural(
+                  obj.participants,
+                  ["участник", "участника", "участников"],
+                  true
+                )
+              }}
             </div>
           </div>
         </div>
@@ -142,6 +166,7 @@ import { AuthActionTypes } from "@/store/modules/auth/types";
 import { computed } from "vue";
 import gradients from "./gradients";
 import { Loading } from ".";
+import { plural } from "@/utils/translation";
 
 const route = useRoute();
 const router = useRouter();

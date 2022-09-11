@@ -1,10 +1,20 @@
 <template>
-  <div class="card" :style="gradient[0]">
+  <div
+    class="card"
+    :style="
+      obj.thumbnail
+        ? `background-image: url(${obj.thumbnail}); background-size: cover; background-repeat: no-repeat; background-position: center center;`
+        : gradient[0]
+    "
+  >
     <div
       class="card-body position-relative d-flex align-items-center justify-content-center"
-      :class="[gradient[1]]"
+      :class="obj.thumbnail ? ['text-light'] : [gradient[1]]"
     >
-      <div class="card-name fw-bold fs-5">
+      <div
+        class="card-name fw-bold fs-5"
+        :class="obj.thumbnail ? ['badge bg-white text-dark'] : []"
+      >
         {{ obj.name }}
       </div>
 
@@ -46,12 +56,12 @@
         class="position-absolute bottom-0 start-0 mb-2 ms-2 badge bg-light text-dark"
       >
         <div v-if="obj.price > 0">
-          <span >{{ obj.price }}</span>
-          <span v-if="obj.max_price && obj.max_price > obj.price"> - {{ obj.max_price }}</span>&#8381;
+          <span>{{ obj.price }}</span>
+          <span v-if="obj.max_price && obj.max_price > obj.price">
+            - {{ obj.max_price }}</span
+          >&#8381;
         </div>
-        <div v-else>
-          бесплатно
-        </div>
+        <div v-else>бесплатно</div>
       </div>
 
       <router-link :to="`/events/${obj.id}`" class="stretched-link" />

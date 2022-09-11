@@ -10,7 +10,7 @@ export interface APIEvent {
   end: string;
   participants: number;
   reg_needed: boolean;
-  // thumbnail: string;
+  thumbnail: string;
   organizer: string;
   address: string;
   price: number;
@@ -29,6 +29,7 @@ export interface CreateEventData {
   address: string;
   price: number;
   creator: number;
+  thumbnail?: string;
   max_price: number;
 }
 
@@ -77,7 +78,11 @@ export const starEvent = (
 };
 
 export const createEvent = (data: CreateEventData) => {
-  return API.axios.post("events", data);
+  return API.axios.post("events", data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
 
 export const deleteEvent = (id: string): Promise<void> => {

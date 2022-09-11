@@ -33,10 +33,10 @@ INSTALLED_APPS = [
     "djoser",
 ]
 
+if not DEBUG:
+    INSTALLED_APPS += ["django.contrib.postgres"]
+
 SITE_ID = 1
-
-SOCIALACCOUNT_PROVIDERS = {"telegram": {"TOKEN": "your tokken"}}
-
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -68,12 +68,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "backend.wsgi.application"
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+if DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": config["database"]["NAME"],
+            "USER": config["database"]["USER"],
+            "PASSWORD": config["database"]["PASSWORD"],
+            "HOST": "localhost",
+            "PORT": "",
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {

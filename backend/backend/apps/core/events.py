@@ -20,7 +20,7 @@ class EventListSerializer(serializers.ModelSerializer):
             "thumbnail",
             "reg_needed",
             "participants",
-            "max_price"
+            "max_price",
         ]
 
 
@@ -39,9 +39,8 @@ class CreateEventSerializer(serializers.ModelSerializer):
             "reg_needed",
             "participants",
             "max_price",
-            "creator"
+            "creator",
         ]
-
 
 
 class EventFilter(django_filters.FilterSet):
@@ -60,7 +59,9 @@ class EventFilter(django_filters.FilterSet):
 
     def search_filter(self, queryset, name, value):
         return queryset.filter(
-            Q(name__icontains=value) | Q(description__icontains=value)
+            Q(name__icontains=value)
+            | Q(description__icontains=value)
+            | Q(organizer__icontains=value)
         )
 
 
