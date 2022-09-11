@@ -12,7 +12,7 @@ export const useConfirmDialog = (): UseConfirmDialog => {
 
   const showConfirmDialog = () => {
     if (!confirmDialog.value) return;
-    console.log("DIALOG", confirmDialog.value);
+    // console.log("DIALOG", confirmDialog.value);
     confirmDialog.value.toggle();
   };
 

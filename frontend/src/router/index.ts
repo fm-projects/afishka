@@ -59,7 +59,7 @@ router.beforeEach((to, from, next) => {
     const content = document.getElementById("mainNavbarContent");
     content!.classList.remove("show");
     btn.classList.add("collapsed");
-    console.log("collapsed");
+    // console.log("collapsed");
   }
 
   const res = handleMetaViews(to, next);

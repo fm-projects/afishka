@@ -15,10 +15,9 @@ class Event(models.Model):
     end = models.DateTimeField("Окончание")
     participants = models.IntegerField("Количество участников", default=1)
     reg_needed = models.BooleanField("Требуется регистрация", default=False)
-    # thumbnail = models.ImageField("Обложка", upload_to="events", blank=True)
+    thumbnail = models.ImageField("Обложка", upload_to="events", blank=True)
     organizer = models.CharField("Организатор", max_length=100, blank=True)
     address = models.CharField("Адрес", max_length=200, blank=True)
-    verbose_address = models.CharField("Краткий адрес", max_length=200, blank=True)
     price = models.IntegerField("Цена", default=0)
     max_price = models.IntegerField("Максимальная цена", default=None, null=True, blank=True)
 

@@ -30,7 +30,7 @@ export interface APIUser {
 }
 
 export const getCurrentUser = (): Promise<AxiosResponse<APIUser>> => {
-  return API.axios.get<APIUser>("auth/users/me");
+  return API.axios.get<APIUser>("auth/users/me/");
 };
 
 export const createUser = (

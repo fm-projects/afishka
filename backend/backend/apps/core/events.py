@@ -17,12 +17,31 @@ class EventListSerializer(serializers.ModelSerializer):
             "address",
             "organizer",
             "accepted",
-            # "thumbnail",
+            "thumbnail",
             "reg_needed",
             "participants",
-            "verbose_address",
             "max_price"
         ]
+
+
+class CreateEventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = [
+            "name",
+            "description",
+            "start",
+            "end",
+            "price",
+            "address",
+            "organizer",
+            "thumbnail",
+            "reg_needed",
+            "participants",
+            "max_price",
+            "creator"
+        ]
+
 
 
 class EventFilter(django_filters.FilterSet):
@@ -50,6 +69,11 @@ class EventViewSet(viewsets.ModelViewSet):
     serializer_class = EventListSerializer
     ordering = ["start"]
     filterset_class = EventFilter
+
+    def get_serializer_class(self):
+        if self.request.method == "POST":
+            return CreateEventSerializer
+        return EventListSerializer
 
 
 router = routers.SimpleRouter(trailing_slash=False)

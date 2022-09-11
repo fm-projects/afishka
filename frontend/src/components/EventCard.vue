@@ -45,9 +45,9 @@
       <div
         class="position-absolute bottom-0 start-0 mb-2 ms-2 badge bg-light text-dark"
       >
-        <div v-if="obj.price">
+        <div v-if="obj.price > 0">
           <span >{{ obj.price }}</span>
-          <span v-if="obj.max_price"> - {{ obj.max_price }}</span>&#8381;
+          <span v-if="obj.max_price && obj.max_price > obj.price"> - {{ obj.max_price }}</span>&#8381;
         </div>
         <div v-else>
           бесплатно
@@ -59,7 +59,7 @@
   </div>
   <div class="p-2">
     <div>{{ toShortDateTime(new Date(obj.start)) }}</div>
-    <div v-if="obj.verbose_address">{{ obj.verbose_address }}</div>
+    <div v-if="obj.address">{{ obj.address }}</div>
   </div>
 </template>
 <script lang="ts" setup>

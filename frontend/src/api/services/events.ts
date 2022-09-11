@@ -14,7 +14,6 @@ export interface APIEvent {
   organizer: string;
   address: string;
   price: number;
-  verbose_address: string;
   accepted: boolean;
   max_price: number;
 }
@@ -26,10 +25,11 @@ export interface CreateEventData {
   end: string;
   participants: number;
   reg_needed: boolean;
-  organizer: string;
+  organizer?: string;
   address: string;
   price: number;
-  verbose_address: string;
+  creator: number;
+  max_price: number;
 }
 
 export interface PatchEventData {
@@ -42,7 +42,6 @@ export interface PatchEventData {
   organizer?: string;
   address?: string;
   price?: number;
-  verbose_address?: string;
   accepted?: boolean;
 }
 
@@ -57,6 +56,7 @@ export interface EventListParams {
   price__gte?: number;
   price__lte?: number;
   accepted?: boolean;
+  query?: string;
 }
 
 export const listEvents = (

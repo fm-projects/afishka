@@ -51,9 +51,10 @@
           <div
             class="position-absolute bottom-0 start-0 mb-2 ms-2 badge bg-light text-dark fs-5"
           >
-            <div v-if="obj.price">
+            <div v-if="obj.price > 0">
               <span>{{ obj.price }}</span>
-              <span v-if="obj.max_price"> - {{ obj.max_price }}</span
+              <span v-if="obj.max_price && obj.max_price > obj.price">
+                - {{ obj.max_price }}</span
               >&#8381;
             </div>
             <div v-else>бесплатно</div>
@@ -62,16 +63,36 @@
       </div>
 
       <div class="row mt-3">
-        <div class="col">
+        <div class="col order-1 order-md-0">
           <div class="">
             <div class="mb-3" v-if="obj.description">
               {{ obj.description }}
             </div>
-            <div>{{ toShortDateTime(new Date(obj.start)) }}</div>
-            <div v-if="obj.verbose_address">{{ obj.verbose_address }}</div>
+            <div class="mb-1">
+              <i class="bi-clock me-2"></i>
+              {{ toShortDateTime(new Date(obj.start)) }}
+            </div>
+            <div v-if="obj.address" class="mb-1">
+              <i class="bi-geo-alt me-2"></i>{{ obj.address }}
+            </div>
+            <div class="mb-1">
+              <i class="bi-calendar-check me-2"></i
+              >{{
+                obj.reg_needed
+                  ? "Требуется регистрация"
+                  : "Регистрация не требуется"
+              }}
+            </div>
+            <div v-if="obj.organizer" class="mb-1">
+              <i class="bi-person me-2"></i>
+              {{ obj.organizer }}
+            </div>
           </div>
         </div>
-        <div class="col-auto" v-if="store.state.auth.user?.is_staff">
+        <div
+          class="col-12 col-md-auto order-0 order-md-1 mb-2 mb-md-0"
+          v-if="store.state.auth.user?.is_staff"
+        >
           <div class="mb-2">
             <button
               class="btn btn-outline-danger w-100"
@@ -84,9 +105,12 @@
           </div>
 
           <div class="mb-2">
-            <button class="btn btn-outline-dark w-100">
+            <a
+              class="btn btn-outline-dark w-100"
+              :href="`/admin/core/event/${obj.id}/change/`"
+            >
               <i class="bi-pencil me-2"></i>Изменить
-            </button>
+            </a>
           </div>
           <div class="mb-2">
             <button
@@ -117,6 +141,7 @@ import { useStore } from "@/store";
 import { AuthActionTypes } from "@/store/modules/auth/types";
 import { computed } from "vue";
 import gradients from "./gradients";
+import { Loading } from ".";
 
 const route = useRoute();
 const router = useRouter();
