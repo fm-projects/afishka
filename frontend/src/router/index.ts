@@ -34,6 +34,9 @@ const routes: Array<RouteRecordRaw> = [
     path: "/create",
     name: "create",
     component: () => import("../components/Create.vue"),
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/events/:id",

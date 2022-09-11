@@ -114,6 +114,9 @@ const register = () => {
           username: () => {
             data.username.errorMessage = "Имя пользователя уже занято";
           },
+          password: (e) => {
+            data.password1.errorMessage = e[0];
+          },
         },
       });
     });

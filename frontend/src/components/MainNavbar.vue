@@ -100,7 +100,7 @@ import { computed, onMounted, onUnmounted, ref } from "vue";
 import { useStore } from "@/store";
 import router from "@/router";
 import { useRoute } from "vue-router";
-import logo from "@/assets/icons/icon.svg";
+import logo from "@/assets/icons/icon.png";
 import { toSvg } from "jdenticon";
 import { AuthActionTypes } from "@/store/modules/auth/types";
 
