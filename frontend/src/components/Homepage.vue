@@ -320,7 +320,7 @@ const refreshResults = async (reset = true) => {
   };
 
   if (FILTERS.value.starred && store.state.auth.user)
-    params.id__in = store.state.auth.user.starred_events.join(",");
+    params.id__in = store.state.auth.user.starred_events.length ? store.state.auth.user.starred_events.join(",") : "0";
 
   if (FILTERS.value.need_moderation && store.state.auth.user?.is_staff)
     params.accepted = false;
