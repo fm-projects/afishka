@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import Home from "../components/Homepage.vue";
+import Homepage from "../components/Homepage.vue";
 import { handleMetaViews } from "./utils";
 import { store } from "@/store";
 import { ViewPermissions } from "./permissions";
@@ -8,7 +8,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "home",
-    component: Home,
+    component: Homepage,
     meta: {
       navbar: {
         transparent: true,
@@ -29,6 +29,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/denied",
     name: "denied",
     component: () => import("../components/PermissionDenied.vue"),
+  },
+  {
+    path: "/create",
+    name: "create",
+    component: () => import("../components/Create.vue"),
   },
 ];
 

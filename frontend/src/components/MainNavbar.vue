@@ -70,11 +70,12 @@
             <svg v-html="jdenticon" id="avatar"></svg>
           </div>
           <ul class="dropdown-menu dropdown-menu-end">
-            <!-- <li>
-              <router-link class="dropdown-item" to="/account">
-                <i class="bi bi-person me-2"></i><span>Аккаунт</span>
+            <li>
+              <router-link class="dropdown-item" to="/create">
+                <i class="bi bi-calendar-plus me-2"></i
+                ><span>Добавить мероприятие</span>
               </router-link>
-            </li> -->
+            </li>
             <!-- <li>
               <router-link class="dropdown-item" to="/settings">
                 <i class="bi bi-gear me-2"></i><span>Настройки</span>

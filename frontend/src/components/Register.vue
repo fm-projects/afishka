@@ -15,7 +15,7 @@
             <div class="mb-3">
               <form-input
                 name="username"
-                label="Никнейм"
+                label="Имя пользователя"
                 v-model="data.username.value"
                 :error="data.username.errorMessage"
                 :isBound="isBound"
@@ -46,7 +46,11 @@
             </div>
 
             <div class="text-center">
-              <button type="submit" class="btn btn-outline-primary" @click.prevent="register">
+              <button
+                type="submit"
+                class="btn btn-outline-primary"
+                @click.prevent="register"
+              >
                 Зарегистрироваться
               </button>
             </div>
@@ -61,7 +65,7 @@
 import { FormBuilder, handleBackendError, validateForm } from "@/utils/forms";
 import { reactive, ref } from "vue";
 import { FormInput } from "@/components";
-import {  } from "../api/services/auth";
+import { CreateUserData, createUser } from "@/api/services/auth";
 import { useRouter } from "vue-router";
 import { AxiosError } from "axios";
 
@@ -95,23 +99,20 @@ const register = () => {
   if (!isBound.value) isBound.value = true;
   if (!verdict) return;
 
-  const newStudent: CreateStudentData = {
-    first_name: data.first_name.value,
-    surname: data.surname.value,
-    last_name: data.last_name.value,
-    email: data.email.value,
+  const newStudent: CreateUserData = {
+    username: data.username.value,
     password: data.password1.value,
   };
 
-  createStudent(newStudent)
+  createUser(newStudent)
     .then(() => {
       router.push("/login");
     })
     .catch((e: AxiosError) => {
       handleBackendError(e, {
         "400": {
-          email: () => {
-            data.email.errorMessage = "Пользователь с таким email уже существует";
+          username: () => {
+            data.username.errorMessage = "Имя пользователя уже занято";
           },
         },
       });

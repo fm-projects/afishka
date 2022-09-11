@@ -120,7 +120,7 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE": 10,
+    "PAGE_SIZE": 20,
 }
 
 JWT_AUTH = {
@@ -159,7 +159,11 @@ DJOSER = {
         "user_list": ["backend.permissions.CurrentUserOrAdmin"],
         "token_create": ["rest_framework.permissions.AllowAny"],
         "token_destroy": ["rest_framework.permissions.IsAuthenticated"],
-    }
+    },
+    "SERIALIZERS": {
+        "user": "backend.apps.core.serializers.UserSerializer",
+        "current_user": "backend.apps.core.serializers.CurrentUserSerializer",
+    },
 }
 
 

@@ -1,14 +1,46 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap");
 
 body {
-  font-family: "Inter", serif;
-  font-weight: 500;
+  font-family: "VK Sans Display", sans-serif;
 }
 
-h1,
-h2,
-h3 {
-  font-family: "Nunito", sans-serif;
-  font-weight: 700;
+h1, h2, h3 {
+  font-family: "VK Sans Display", sans-serif;
+  font-weight: 600;
+}
+
+.rt-wp {
+  padding-top: 60px;
+}
+
+@font-face {
+  font-family: "VK Sans Display";
+  src: url(../assets/fonts/VKSans/VKSansDisplay-Bold.ttf);
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "VK Sans Display";
+  src: url(../assets/fonts/VKSans/VKSansDisplay-Regular.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "VK Sans Display";
+  src: url(../assets/fonts/VKSans/VKSansDisplay-Medium.ttf);
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "VK Sans Display";
+  src: url(../assets/fonts/VKSans/VKSansDisplay-DemiBold.ttf);
+  font-weight: 600;
+  font-style: normal;
+}
+
+.vk-sans {
+  font-family: "VK Sans Display";
 }

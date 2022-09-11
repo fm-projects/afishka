@@ -12,12 +12,12 @@ export enum AuthAPIURLS {
   REFRESH_TOKEN = "auth/jwt/refresh/",
 }
 
-interface UserCredentials {
+export interface UserCredentials {
   username: string;
   password: string;
 }
 
-interface CreateUserData {
+export interface CreateUserData {
   username: string;
   password: string;
 }
@@ -25,14 +25,18 @@ interface CreateUserData {
 export interface APIUser {
   username: string;
   id: number;
+  starred_events: number[];
+  is_staff: boolean;
 }
 
 export const getCurrentUser = (): Promise<AxiosResponse<APIUser>> => {
   return API.axios.get<APIUser>("auth/users/me");
 };
 
-export const createUserData = (): Promise<AxiosResponse<APIUser>> => {
-  return API.noAuthAxios.post("auth/users/");
+export const createUser = (
+  data: CreateUserData
+): Promise<AxiosResponse<APIUser>> => {
+  return API.noAuthAxios.post("auth/users/", data);
 };
 
 export const login = (
