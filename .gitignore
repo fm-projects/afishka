@@ -27,7 +27,7 @@ pnpm-debug.log*
 __pycache__
 
 # VueJS dist
-dist
+#dist
 
 # Development media files
 media

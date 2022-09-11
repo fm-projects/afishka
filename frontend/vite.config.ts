@@ -6,6 +6,11 @@ process.env.APP_VERSION = require("./package.json").version;
 
 export default defineConfig({
   plugins: [vue()],
+  build: {
+    sourcemap: true,
+    assetsDir: "static",
+    outDir: "dist",
+  },
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),
