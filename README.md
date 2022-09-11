@@ -22,4 +22,4 @@
 Поисковая система поддерживает 15 самых популярных мировых языков, что будет удобно для иностранных гостей Альметьевска.
 
 ## Поиск, демонстрация
-https://github.com/AlanTheKnight/afishka/blob/main/search.mp4
+https://zaborshicov.ru/search.mp4
