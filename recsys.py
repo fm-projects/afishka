@@ -1,36 +1,12 @@
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
+import gradio as gr
 
 
-def sort_events(indices, similarities):
-    results = list(dict(sorted(dict(zip(indices, similarities)).items(), key=lambda item: item[1], reverse=True)).keys())
-    return results
+model = SentenceTransformer('distiluse-base-multilingual-cased-v1')
 
-def range_events(model, data, seen_indices):
-    history = []
-    sentence_embeddings = {}
-    for id, s in data.items():
-        sentence_embeddings[id] = model.encode(s)
-    for idx in seen_indices:
-        history.append(sentence_embeddings[idx])
-    similarities = np.array(np.mean([(cosine_similarity([emb], list(sentence_embeddings.values())) * ratio).tolist()[0] 
-                                    for emb, ratio in zip(history, np.linspace(0.5, 1.5, len(history)))], axis=0))
-    result = sort_events(data.keys(), similarities)
-    return result
-
-def id_to_text(events, indices):
-    texts = []
-    for id in indices:
-        texts.append(events[id])
-    return texts
-
-def recsys(model, data, seen):
-    ranked = range_events(model, data, seen)
-    ranked = id_to_text(data, ranked)
-    return ranked
-
-events = {  # index: name
+data = {  # index: name
     1: 'К 140-летию со дня рождения Игоря Стравинского',
     2: 'Тренировки в Спортивном парке',
     3: 'Закрытие Большого летнего музыкального фестиваля «Сириус»',
@@ -53,6 +29,37 @@ events = {  # index: name
     20: 'Футбол. Лига чемпионов. "Аякс" (Нидерланды) - "Рейнджерс" (Шотландия). '
 }
 
-model = SentenceTransformer('distiluse-base-multilingual-cased-v1')
-seen_indices = [20, 2, 5, 7]
-recsys(model, events, seen_indices)
+itms = list(data.values())
+
+def sort_events(indices, similarities):
+    results = sorted(dict(zip(indices, similarities)).items(), key=lambda item: item[1], reverse=True) #))
+    return results
+
+def range_events(model, data, seen_indices):
+    history = []
+    sentence_embeddings = {}
+    for id, s in data.items():
+        sentence_embeddings[id] = model.encode(s)
+    for idx in seen_indices:
+        history.append(sentence_embeddings[idx])
+    similarities = np.array(np.mean([(cosine_similarity([emb], list(sentence_embeddings.values())) * ratio).tolist()[0] 
+                                    for emb, ratio in zip(history, np.linspace(0.5, 1.5, len(history)))], axis=0))
+    result = sort_events(data.values(), similarities)
+    return result
+
+def id_to_text(events, indices):
+    texts = []
+    for id in indices:
+        texts.append(events[id])
+    return texts
+
+def recsys(seen):
+    seen = [itms.index(i) + 1 for i in seen]
+    ranked = dict(range_events(model, data, seen))
+    # ranked = id_to_text(data, ranked)
+    return ranked
+
+
+
+demo = gr.Interface(fn=recsys, inputs=[gr.CheckboxGroup(itms)], outputs=[gr.Label(num_top_classes=10)])
+demo.launch(share=True)
