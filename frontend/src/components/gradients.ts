@@ -4,7 +4,15 @@ export const gradients: [string, string][] = [
     background-color: #FBAB7E;
     background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
     `,
-    `text-dark`
+    `text-dark`,
+  ],
+  [
+    `
+    background-color: #85FFBD;
+background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
+
+    `,
+    `text-dark`,
   ],
   [
     `

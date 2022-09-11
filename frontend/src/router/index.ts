@@ -35,6 +35,10 @@ const routes: Array<RouteRecordRaw> = [
     name: "create",
     component: () => import("../components/Create.vue"),
   },
+  {
+    path: "/events/:id",
+    component: () => import("../components/EventInfo.vue"),
+  },
 ];
 
 const router = createRouter({

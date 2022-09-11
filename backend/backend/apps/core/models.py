@@ -20,6 +20,8 @@ class Event(models.Model):
     address = models.CharField("Адрес", max_length=200, blank=True)
     verbose_address = models.CharField("Краткий адрес", max_length=200, blank=True)
     price = models.IntegerField("Цена", default=0)
+    max_price = models.IntegerField("Максимальная цена", default=None, null=True, blank=True)
+
     accepted = models.BooleanField("Прошло модерацию", default=False)
     creator = models.ForeignKey(
         to=User, on_delete=models.CASCADE, verbose_name="Создатель"

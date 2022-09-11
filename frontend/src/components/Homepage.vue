@@ -4,15 +4,36 @@
 
     <div class="row">
       <div class="col-12 col-lg-4 order-0 order-lg-1 mb-3 mb-lg-0">
-        <div
-          class="btn btn-outline-dark mb-3"
-          data-bs-toggle="collapse"
-          href="#filters-collapse"
-          role="button"
-        >
-          <i class="bi-funnel me-2"></i>Фильтры
+        <div class="d-flex flex-wrap">
+          <router-link class="btn btn-outline-dark mb-2 me-2" to="/create">
+            <i class="bi-plus me-2"></i>Добавить мероприятие
+          </router-link>
+          <div
+            class="btn btn-outline-dark mb-2"
+            data-bs-toggle="collapse"
+            href="#filters-collapse"
+            role="button"
+          >
+            <i class="bi-funnel me-2"></i>Фильтры
+          </div>
         </div>
+
         <div class="collapse show" id="filters-collapse">
+          <div class="mb-3 mt-3">
+            <FormInput
+              label=""
+              v-model="FILTERS.query"
+              name="query"
+              is-input-group
+              @change="() => refreshResults()"
+              clear-button
+            >
+              <span class="input-group-text" id="basic-addon1"
+                ><i class="bi-search"></i
+              ></span>
+            </FormInput>
+          </div>
+
           <div class="mb-3" v-if="store.getters.isAuthenticated">
             <div class="form-check">
               <input
@@ -24,6 +45,21 @@
               />
               <label class="form-check-label" for="show-starred">
                 Избранные мероприятия
+              </label>
+            </div>
+          </div>
+
+          <div class="mb-3" v-if="store.state.auth.user?.is_staff">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                v-model="FILTERS.need_moderation"
+                id="show-accepted"
+                @change="() => refreshResults()"
+              />
+              <label class="form-check-label" for="show-accepted">
+                Ожидающие модерации
               </label>
             </div>
           </div>
@@ -171,6 +207,7 @@ import "@vuepic/vue-datepicker/dist/main.css";
 import gradients from "./gradients";
 import FormSelect, { SelectOption } from "./forms/FormSelect.vue";
 import { useStore } from "@/store";
+import { Loading, FormInput } from ".";
 
 const regNeedOptions: SelectOption[] = [
   {
@@ -245,6 +282,8 @@ interface Filters {
   reg_needed: string;
   participants: string;
   price: string;
+  need_moderation: boolean;
+  query: string;
 }
 
 const page = ref(1);
@@ -252,11 +291,13 @@ const isLoading = ref(true);
 const store = useStore();
 
 const FILTERS = ref<Filters>({
-  date: [moment().toDate(), moment().add(1, "month").toDate()],
+  date: [],
   starred: false,
   reg_needed: "0",
   participants: "0",
   price: "4",
+  need_moderation: false,
+  query: "",
 });
 
 onMounted(async () => {
@@ -272,11 +313,14 @@ const refreshResults = async (reset = true) => {
 
   const params: EventListParams = {
     page: page.value,
-    accepted: true,
   };
 
   if (FILTERS.value.starred && store.state.auth.user)
     params.id__in = store.state.auth.user.starred_events.join(",");
+
+  if (FILTERS.value.need_moderation && store.state.auth.user?.is_staff)
+    params.accepted = false;
+  else params.accepted = true;
 
   if (FILTERS.value.date.length) {
     const dates = FILTERS.value.date
@@ -291,6 +335,10 @@ const refreshResults = async (reset = true) => {
 
   if (FILTERS.value.reg_needed !== "0") {
     params.reg_needed = FILTERS.value.reg_needed === "2";
+  }
+
+  if (FILTERS.value.query.trim()) {
+    params.query = FILTERS.value.query.trim();
   }
 
   if (FILTERS.value.participants !== "0") {

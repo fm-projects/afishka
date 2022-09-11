@@ -70,17 +70,18 @@
             <svg v-html="jdenticon" id="avatar"></svg>
           </div>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li>
+            <!-- <li>
               <router-link class="dropdown-item" to="/create">
                 <i class="bi bi-calendar-plus me-2"></i
                 ><span>Добавить мероприятие</span>
               </router-link>
-            </li>
-            <!-- <li>
-              <router-link class="dropdown-item" to="/settings">
-                <i class="bi bi-gear me-2"></i><span>Настройки</span>
-              </router-link>
             </li> -->
+            <li v-if="user.is_staff">
+              <a href="/admin" class="dropdown-item">
+                <i class="bi-window-sidebar me-2"></i
+                >Панель администратора
+              </a>
+            </li>
             <li>
               <a class="dropdown-item" href="#" @click.prevent="logout">
                 <i class="bi bi-box-arrow-right me-2"></i>
@@ -136,7 +137,7 @@ onUnmounted(() => {
 }
 
 #logo {
-  height: 30px;
+  height: 35px;
 }
 
 #brand-name {

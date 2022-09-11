@@ -2,27 +2,48 @@ import API from "@/api";
 import { AxiosResponse } from "axios";
 import { Paginator } from "../types";
 
-enum APIEventTypes {
-  GROUP,
-  INDIVIDUAL,
-  PUBLIC,
-}
-
 export interface APIEvent {
   id: number;
   name: string;
   description: string;
   start: string;
   end: string;
-  event_type: APIEventTypes;
-  max_members: number;
+  participants: number;
   reg_needed: boolean;
-  thumbnail: string;
+  // thumbnail: string;
   organizer: string;
   address: string;
   price: number;
-  active: boolean;
   verbose_address: string;
+  accepted: boolean;
+  max_price: number;
+}
+
+export interface CreateEventData {
+  name: string;
+  description: string;
+  start: string;
+  end: string;
+  participants: number;
+  reg_needed: boolean;
+  organizer: string;
+  address: string;
+  price: number;
+  verbose_address: string;
+}
+
+export interface PatchEventData {
+  name?: string;
+  description?: string;
+  start?: string;
+  end?: string;
+  participants?: number;
+  reg_needed?: boolean;
+  organizer?: string;
+  address?: string;
+  price?: number;
+  verbose_address?: string;
+  accepted?: boolean;
 }
 
 export interface EventListParams {
@@ -35,7 +56,7 @@ export interface EventListParams {
   participants__lte?: number;
   price__gte?: number;
   price__lte?: number;
-  accepted?: boolean
+  accepted?: boolean;
 }
 
 export const listEvents = (
@@ -44,9 +65,25 @@ export const listEvents = (
   return API.axios.get("events", { params });
 };
 
+export const getEvent = (id: string): Promise<AxiosResponse<APIEvent>> => {
+  return API.axios.get(`events/${id}`);
+};
+
 export const starEvent = (
   event: number,
   star: boolean
 ): Promise<AxiosResponse<any>> => {
   return API.axios.post("star-event", { event, star });
+};
+
+export const createEvent = (data: CreateEventData) => {
+  return API.axios.post("events", data);
+};
+
+export const deleteEvent = (id: string): Promise<void> => {
+  return API.axios.delete(`events/${id}`);
+};
+
+export const patchEvent = (id: string | number, data: PatchEventData) => {
+  return API.axios.patch(`events/${id}`, data);
 };

@@ -1,11 +1,5 @@
 <template>
   <div class="card" :style="gradient[0]">
-    <img
-      v-if="obj.thumbnail"
-      :src="obj.thumbnail"
-      alt=""
-      class="card-img-top"
-    />
     <div
       class="card-body position-relative d-flex align-items-center justify-content-center"
       :class="[gradient[1]]"
@@ -14,7 +8,10 @@
         {{ obj.name }}
       </div>
 
-      <div class="position-absolute top-0 end-0 pt-2 pe-2" v-if="store.getters.isAuthenticated">
+      <div
+        class="star-wrapper position-absolute top-0 end-0 pt-2 pe-2"
+        v-if="store.getters.isAuthenticated"
+      >
         <div id="star-btn" @click="changeStarredState">
           <svg
             v-if="!isStarred"
@@ -48,9 +45,16 @@
       <div
         class="position-absolute bottom-0 start-0 mb-2 ms-2 badge bg-light text-dark"
       >
-        <span v-if="obj.price">{{ obj.price }}&#8381;</span>
-        <span v-else>бесплатно</span>
+        <div v-if="obj.price">
+          <span >{{ obj.price }}</span>
+          <span v-if="obj.max_price"> - {{ obj.max_price }}</span>&#8381;
+        </div>
+        <div v-else>
+          бесплатно
+        </div>
       </div>
+
+      <router-link :to="`/events/${obj.id}`" class="stretched-link" />
     </div>
   </div>
   <div class="p-2">
@@ -73,7 +77,7 @@ const isStarred = computed(
 
 interface Props {
   obj: APIEvent;
-  gradient: [string, string]
+  gradient: [string, string];
 }
 
 const changeStarredState = () => {
@@ -113,6 +117,14 @@ const props = defineProps<Props>();
 
 #star-btn {
   transition: all 0.2s ease-in-out;
+}
+
+.star-wrapper {
+  z-index: 999;
+}
+
+.stretched-link {
+  z-index: 100;
 }
 
 .icon {
